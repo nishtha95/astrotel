@@ -21,11 +21,11 @@ jobs:
           with:
             node-version: 16
 
-        - name: Install dependencies
-          uses: bahmutov/npm-install@v1
-
-        - name: Build project
-          run: npm run build
+        - name: Install dependencies and build project
+          run: |
+              cd astrotel-front-end
+              npm install
+              npm run build
 
         - name: Upload production-ready build files
           uses: actions/upload-artifact@v2
