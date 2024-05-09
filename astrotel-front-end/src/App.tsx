@@ -1,7 +1,7 @@
-import WebApp from '@twa-dev/sdk';
+// import WebApp from '@twa-dev/sdk';
 import './App.css';
 import { TonConnectButton } from '@tonconnect/ui-react';
-import { Block, Button } from 'konsta/react';
+import { Button } from 'konsta/react';
 
 function App() {
   return (
