@@ -1,0 +1,118 @@
+#pragma version =0.4.4;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+#include "astrotel_AstrologerContract.headers.fc";
+#include "astrotel_AstrologerContract.stdlib.fc";
+#include "astrotel_AstrologerContract.constants.fc";
+#include "astrotel_AstrologerContract.storage.fc";
+
+;;
+;; Contract AstrologerContract functions
+;;
+
+(slice, slice, slice, int, slice) $AstrologerContract$_contract_init(slice $owner) impure inline_ref {
+    var (($self'owner, $self'parent, $self'expertise, $self'fees, $self'telegram_id)) = (null(), null(), null(), null(), null());
+    $self'owner = $owner;
+    $self'parent = __tact_context_get_sender();
+    $self'expertise = __gen_slice_string_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7();
+    $self'fees = 0;
+    $self'telegram_id = __gen_slice_string_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7();
+    return ($self'owner, $self'parent, $self'expertise, $self'fees, $self'telegram_id);
+}
+
+((slice, slice, slice, int, slice), (slice, slice, int, slice)) $AstrologerContract$_fun_getAccountDetails((slice, slice, slice, int, slice) $self) impure inline_ref {
+    var (($self'owner, $self'parent, $self'expertise, $self'fees, $self'telegram_id)) = $self;
+    return (($self'owner, $self'parent, $self'expertise, $self'fees, $self'telegram_id), $Astrologer$_constructor_owner_expertise_fees_telegram_id($self'owner, $self'expertise, $self'fees, $self'telegram_id));
+}
+
+;;
+;; Receivers of a Contract AstrologerContract
+;;
+
+(((slice, slice, slice, int, slice)), ()) $AstrologerContract$_internal_binary_UpdateDetails((slice, slice, slice, int, slice) $self, (slice, int, slice) $msg) impure inline {
+    var ($self'owner, $self'parent, $self'expertise, $self'fees, $self'telegram_id) = $self;
+    var ($msg'expertise, $msg'fees, $msg'telegram_id) = $msg;
+    throw_unless(23565, ( __tact_slice_eq_bits($self'owner, __tact_context_get_sender()) ));
+    $self'expertise = $msg'expertise;
+    $self'fees = $msg'fees;
+    $self'telegram_id = $msg'telegram_id;
+    return (($self'owner, $self'parent, $self'expertise, $self'fees, $self'telegram_id), ());
+}
+
+;;
+;; Get methods of a Contract AstrologerContract
+;;
+
+_ %getAccountDetails() method_id(72249) {
+    var self = $AstrologerContract$_contract_load();
+    var res = self~$AstrologerContract$_fun_getAccountDetails();
+    return $Astrologer$_to_external(res);
+}
+
+_ supported_interfaces() method_id {
+    return (
+        "org.ton.introspection.v0"H >> 128,
+        "org.ton.abi.ipfs.v0"H >> 128,
+        "org.ton.deploy.lazy.v0"H >> 128,
+        "org.ton.chain.workchain.v0"H >> 128
+    );
+}
+
+_ get_abi_ipfs() method_id {
+    return "ipfs://QmQ8JEEBQ3s52YsBwdDBAwpXjqDt7Fed4PQbFzf6vyebTW";
+}
+
+_ lazy_deployment_completed() method_id {
+    return get_data().begin_parse().load_int(1);
+}
+
+;;
+;; Routing of a Contract AstrologerContract
+;;
+
+((slice, slice, slice, int, slice), int) $AstrologerContract$_contract_router_internal((slice, slice, slice, int, slice) self, int msg_bounced, slice in_msg) impure inline_ref {
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        return (self, true);
+    }
+    
+    ;; Parse incoming message
+    int op = 0;
+    if (slice_bits(in_msg) >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    
+    
+    ;; Receive UpdateDetails message
+    if (op == 4233759854) {
+        var msg = in_msg~$UpdateDetails$_load();
+        self~$AstrologerContract$_internal_binary_UpdateDetails(msg);
+        return (self, true);
+    }
+    
+    return (self, false);
+}
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    var msg_flags = cs~load_uint(4);
+    var msg_bounced = -(msg_flags & 1);
+    slice msg_sender_addr = __tact_verify_address(cs~load_msg_addr());
+    __tact_context = (msg_bounced, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var self = $AstrologerContract$_contract_load();
+    
+    ;; Handle operation
+    int handled = self~$AstrologerContract$_contract_router_internal(msg_bounced, in_msg);
+    
+    ;; Throw if not handled
+    throw_unless(130, handled);
+    
+    ;; Persist state
+    $AstrologerContract$_contract_store(self);
+}

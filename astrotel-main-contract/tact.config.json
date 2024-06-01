@@ -1,0 +1,10 @@
+{
+    "projects": [{
+        "name": "astrotel",
+        "path": "./sources/AstrotelMainContract.tact",
+        "output": "./sources/output",
+        "options":{
+            
+        }
+    }]
+}
