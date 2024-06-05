@@ -4,7 +4,7 @@
         "path": "./sources/AstrotelMainContract.tact",
         "output": "./sources/output",
         "options":{
-            
+            "debug": true
         }
     }]
 }

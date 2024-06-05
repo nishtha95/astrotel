@@ -432,40 +432,40 @@ export type AddAstrologer = {
     $$type: 'AddAstrologer';
     expertise: string;
     fees: bigint;
-    telgram_id: string;
+    telegram_id: string;
 }
 
 export function storeAddAstrologer(src: AddAstrologer) {
     return (builder: Builder) => {
         let b_0 = builder;
-        b_0.storeUint(442795836, 32);
+        b_0.storeUint(2787501289, 32);
         b_0.storeStringRefTail(src.expertise);
         b_0.storeUint(src.fees, 32);
-        b_0.storeStringRefTail(src.telgram_id);
+        b_0.storeStringRefTail(src.telegram_id);
     };
 }
 
 export function loadAddAstrologer(slice: Slice) {
     let sc_0 = slice;
-    if (sc_0.loadUint(32) !== 442795836) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 2787501289) { throw Error('Invalid prefix'); }
     let _expertise = sc_0.loadStringRefTail();
     let _fees = sc_0.loadUintBig(32);
-    let _telgram_id = sc_0.loadStringRefTail();
-    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telgram_id: _telgram_id };
+    let _telegram_id = sc_0.loadStringRefTail();
+    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
 }
 
 function loadTupleAddAstrologer(source: TupleReader) {
     let _expertise = source.readString();
     let _fees = source.readBigNumber();
-    let _telgram_id = source.readString();
-    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telgram_id: _telgram_id };
+    let _telegram_id = source.readString();
+    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
 }
 
 function storeTupleAddAstrologer(source: AddAstrologer) {
     let builder = new TupleBuilder();
     builder.writeString(source.expertise);
     builder.writeNumber(source.fees);
-    builder.writeString(source.telgram_id);
+    builder.writeString(source.telegram_id);
     return builder.build();
 }
 
@@ -540,8 +540,8 @@ function initAstrologerContract_init_args(src: AstrologerContract_init_args) {
 }
 
 async function AstrologerContract_init(owner: Address) {
-    const __code = Cell.fromBase64('te6ccgECEAEAAkwAART/APSkE/S88sgLAQIBYgIDA3rQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCCAQFAgEgBgcAjAGSMH/gcCHXScIflTAg1wsf3oIQ/FoMbrqOKNMfAYIQ/FoMbrry4IHUAdAB0x/UAdBDMGwTbDOBXA34QlJgxwXy9H/gMHAAvMj4QwHMfwHKAFVAUFQg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxZYINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WyFjPFskBzBLLH8hYzxbJAczJ7VQCEbzRztnm2eNipAgJAgEgDA0Bzu1E0NQB+GPSAAGOT/pAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAHUAdAB0x/UAdAVFEMwbBXg+CjXCwqDCbry4IkKAAhUdCEjAUb6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAdHbPAsADvhCiwhwiwgAlbu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcJ2XTlqzTstzOg6WbZRm6KSAIBSA4PABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbVE4SkVFQlEzczUyWXNCd2REQkF3cFhqcUR0N0ZlZDRQUWJGemY2dnllYlRXgg');
-    const __system = Cell.fromBase64('te6cckECEgEAAlYAAQHAAQEFoIv5AgEU/wD0pBP0vPLICwMCAWIEBwN60AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8VRTbPPLgggkFBgCMAZIwf+BwIddJwh+VMCDXCx/eghD8Wgxuuo4o0x8BghD8WgxuuvLggdQB0AHTH9QB0EMwbBNsM4FcDfhCUmDHBfL0f+AwcAC8yPhDAcx/AcoAVUBQVCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlgg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxbIWM8WyQHMEssfyFjPFskBzMntVAIBIAgNAhG80c7Z5tnjYqQJDAHO7UTQ1AH4Y9IAAY5P+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAdQB0AHTH9QB0BUUQzBsFeD4KNcLCoMJuvLgiQoBRvpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB0ds8CwAO+EKLCHCLCAAIVHQhIwIBIA4PAJW7vRgnBc7D1dLK57HoTsOdZKhRtmgnCd1jUtK2R8syLTry398WI5gnAgVcAbgGdjlM5YOq5HJbLDgnCdl05as07LczoOlm2UZuikgCAUgQEQARsK+7UTQ0gABgAHWybuNDVpcGZzOi8vUW1ROEpFRUJRM3M1MllzQndkREJBd3BYanFEdDdGZWQ0UFFiRnpmNnZ5ZWJUV4IKqXgtE=');
+    const __code = Cell.fromBase64('te6ccgECEAEAAl4AART/APSkE/S88sgLAQIBYgIDA3rQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCCAQFAgEgBgcAjAGSMH/gcCHXScIflTAg1wsf3oIQ/FoMbrqOKNMfAYIQ/FoMbrry4IHUAdAB0x/UAdBDMGwTbDOBXA34QlJgxwXy9H/gMHAAvMj4QwHMfwHKAFVAUFQg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxZYINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WyFjPFskBzBLLH8hYzxbJAczJ7VQCEbzRztnm2eNipAgJAgEgDA0Bzu1E0NQB+GPSAAGOT/pAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAHUAdAB0x/UAdAVFEMwbBXg+CjXCwqDCbry4IkKAAhUdCEjAUb6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAdHbPAsADvhCiwhwiwgAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAIBSA4PABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbVRzUjFSNEVxVk5MTVZ5QUd1bjNmaHRLRjVOZEhZVENNYkdNcVlqMVJnNVlSgg');
+    const __system = Cell.fromBase64('te6cckECEgEAAmgAAQHAAQEFoIv5AgEU/wD0pBP0vPLICwMCAWIEBwN60AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8VRTbPPLgggkFBgCMAZIwf+BwIddJwh+VMCDXCx/eghD8Wgxuuo4o0x8BghD8WgxuuvLggdQB0AHTH9QB0EMwbBNsM4FcDfhCUmDHBfL0f+AwcAC8yPhDAcx/AcoAVUBQVCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlgg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxbIWM8WyQHMEssfyFjPFskBzMntVAIBIAgNAhG80c7Z5tnjYqQJDAHO7UTQ1AH4Y9IAAY5P+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAdQB0AHTH9QB0BUUQzBsFeD4KNcLCoMJuvLgiQoBRvpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB0ds8CwAO+EKLCHCLCAAIVHQhIwIBIA4PALm7vRgnBc7D1dLK57HoTsOdZKhRtmgnCd1jUtK2R8syLTry398WI5gnAgVcAbgGdjlM5YOq5HJbLDgnAb1J3vlUWW8cdT094FWcMmgnCdl05as07LczoOlm2UZuikgCAUgQEQARsK+7UTQ0gABgAHWybuNDVpcGZzOi8vUW1Uc1IxUjRFcVZOTE1WeUFHdW4zZmh0S0Y1TmRIWVRDTWJHTXFZajFSZzVZUoIHQzUn0=');
     let builder = beginCell();
     builder.storeRef(__system);
     builder.storeUint(0, 1);
@@ -588,7 +588,7 @@ const AstrologerContract_types: ABIType[] = [
     {"name":"FactoryDeploy","header":1829761339,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"cashback","type":{"kind":"simple","type":"address","optional":false}}]},
     {"name":"UpdateDetails","header":4233759854,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
     {"name":"Astrologer","header":null,"fields":[{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
-    {"name":"AddAstrologer","header":442795836,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telgram_id","type":{"kind":"simple","type":"string","optional":false}}]},
+    {"name":"AddAstrologer","header":2787501289,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
     {"name":"RequestChat","header":3095819024,"fields":[{"name":"astrologer_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"client_telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
 ]
 

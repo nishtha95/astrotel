@@ -1,168 +1,29 @@
 import { toNano } from "@ton/core";
 import { ContractSystem } from "@tact-lang/emulator";
-import { SampleTactContract } from "./output/sample_SampleTactContract";
+import { AstrotelMainContract } from "./output/astrotel_AstrotelMainContract";
 
 describe("contract", () => {
-    it("should deploy correctly", async () => {
-        // Create ContractSystem and deploy contract
-        let system = await ContractSystem.create();
-        let owner = system.treasure("owner");
-        let nonOwner = system.treasure("non-owner");
-        let contract = system.open(await SampleTactContract.fromInit(owner.address));
-        system.name(contract.address, "main");
-        let track = system.track(contract);
-        await contract.send(owner, { value: toNano(1) }, { $$type: "Deploy", queryId: 0n });
-        await system.run();
-        expect(track.collect()).toMatchInlineSnapshot(`
-            [
-              {
-                "$seq": 0,
-                "events": [
-                  {
-                    "$type": "deploy",
-                  },
-                  {
-                    "$type": "received",
-                    "message": {
-                      "body": {
-                        "type": "known",
-                        "value": {
-                          "$$type": "Deploy",
-                          "queryId": 0n,
-                        },
-                      },
-                      "bounce": true,
-                      "from": "@treasure(owner)",
-                      "to": "@main",
-                      "type": "internal",
-                      "value": "1",
-                    },
-                  },
-                  {
-                    "$type": "processed",
-                    "gasUsed": 8040n,
-                  },
-                  {
-                    "$type": "sent",
-                    "messages": [
-                      {
-                        "body": {
-                          "type": "known",
-                          "value": {
-                            "$$type": "DeployOk",
-                            "queryId": 0n,
-                          },
-                        },
-                        "bounce": false,
-                        "from": "@main",
-                        "to": "@treasure(owner)",
-                        "type": "internal",
-                        "value": "0.990764",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ]
-        `);
+  it("should deploy correctly", async () => {
+    const system = await ContractSystem.create();
 
-        // Check counter
-        expect(await contract.getCounter()).toEqual(0n);
+    // Treasure is a contract that has 1m of TONs and is a handy entry point for your smart contracts
+    let treasure = await system.treasure('name of treasure');
 
-        // Increment counter
-        await contract.send(owner, { value: toNano(1) }, "increment");
-        await system.run();
-        expect(track.collect()).toMatchInlineSnapshot(`
-            [
-              {
-                "$seq": 1,
-                "events": [
-                  {
-                    "$type": "received",
-                    "message": {
-                      "body": {
-                        "text": "increment",
-                        "type": "text",
-                      },
-                      "bounce": true,
-                      "from": "@treasure(owner)",
-                      "to": "@main",
-                      "type": "internal",
-                      "value": "1",
-                    },
-                  },
-                  {
-                    "$type": "processed",
-                    "gasUsed": 8176n,
-                  },
-                  {
-                    "$type": "sent",
-                    "messages": [
-                      {
-                        "body": {
-                          "text": "incremented",
-                          "type": "text",
-                        },
-                        "bounce": true,
-                        "from": "@main",
-                        "to": "@treasure(owner)",
-                        "type": "internal",
-                        "value": "0.990604",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ]
-        `);
+    // Contract itself
+    let contract = system.open(await AstrotelMainContract.fromInit(BigInt(1)));
 
-        // Check counter
-        expect(await contract.getCounter()).toEqual(1n);
+    await contract.send(treasure, { value: toNano(1) }, { $$type: "Deploy", queryId: 0n });
+    await system.run();
 
-        // Non-owner
-        await contract.send(nonOwner, { value: toNano(1) }, "increment");
-        await system.run();
-        expect(track.collect()).toMatchInlineSnapshot(`
-            [
-              {
-                "$seq": 2,
-                "events": [
-                  {
-                    "$type": "received",
-                    "message": {
-                      "body": {
-                        "text": "increment",
-                        "type": "text",
-                      },
-                      "bounce": true,
-                      "from": "@treasure(non-owner)",
-                      "to": "@main",
-                      "type": "internal",
-                      "value": "1",
-                    },
-                  },
-                  {
-                    "$type": "failed",
-                    "errorCode": 4429,
-                    "errorMessage": "Invalid sender",
-                  },
-                  {
-                    "$type": "sent-bounced",
-                    "message": {
-                      "body": {
-                        "cell": "x{FFFFFFFF00000000696E6372656D656E74}",
-                        "type": "cell",
-                      },
-                      "bounce": false,
-                      "from": "@main",
-                      "to": "@treasure(non-owner)",
-                      "type": "internal",
-                      "value": "0.995112",
-                    },
-                  },
-                ],
-              },
-            ]
-        `);
-    });
+    // This object would track all transactions in this contract
+    let tracker = system.track(contract.address);
+
+    // This object would track all logs
+    let logger = system.log(contract.address);
+
+    await contract.send(treasure, { value: toNano(1) }, { $$type: "AddAstrologer", expertise: "Vedic Astrology", fees: BigInt(100), telegram_id: "123" });
+    await system.run();
+
+    await contract.getGetAllAstrologers().then((result) => console.log(result)).catch((e) => console.log('error', e));
+  });
 });

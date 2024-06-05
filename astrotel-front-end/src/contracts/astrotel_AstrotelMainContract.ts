@@ -432,40 +432,40 @@ export type AddAstrologer = {
     $$type: 'AddAstrologer';
     expertise: string;
     fees: bigint;
-    telegram_id: string;
+    telgram_id: string;
 }
 
 export function storeAddAstrologer(src: AddAstrologer) {
     return (builder: Builder) => {
         let b_0 = builder;
-        b_0.storeUint(2787501289, 32);
+        b_0.storeUint(442795836, 32);
         b_0.storeStringRefTail(src.expertise);
         b_0.storeUint(src.fees, 32);
-        b_0.storeStringRefTail(src.telegram_id);
+        b_0.storeStringRefTail(src.telgram_id);
     };
 }
 
 export function loadAddAstrologer(slice: Slice) {
     let sc_0 = slice;
-    if (sc_0.loadUint(32) !== 2787501289) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 442795836) { throw Error('Invalid prefix'); }
     let _expertise = sc_0.loadStringRefTail();
     let _fees = sc_0.loadUintBig(32);
-    let _telegram_id = sc_0.loadStringRefTail();
-    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
+    let _telgram_id = sc_0.loadStringRefTail();
+    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telgram_id: _telgram_id };
 }
 
 function loadTupleAddAstrologer(source: TupleReader) {
     let _expertise = source.readString();
     let _fees = source.readBigNumber();
-    let _telegram_id = source.readString();
-    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
+    let _telgram_id = source.readString();
+    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telgram_id: _telgram_id };
 }
 
 function storeTupleAddAstrologer(source: AddAstrologer) {
     let builder = new TupleBuilder();
     builder.writeString(source.expertise);
     builder.writeNumber(source.fees);
-    builder.writeString(source.telegram_id);
+    builder.writeString(source.telgram_id);
     return builder.build();
 }
 
@@ -540,8 +540,8 @@ function initAstrotelMainContract_init_args(src: AstrotelMainContract_init_args)
 }
 
 async function AstrotelMainContract_init(id: bigint) {
-    const __code = Cell.fromBase64('te6ccgECFQEABF8AART/APSkE/S88sgLAQIBYgIDAujQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCyPhDAcx/AcoAVUBQRcsHWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFvQA9ADLH8ntVBAEAgFYDA0C3AGSMH/gcCHXScIflTAg1wsf3iCCEKYl5Om6jp4w0x8BghCmJeTpuvLggdQB0AHTH9QB0EMwbBPbPH/gghCUapi2uo6n0x8BghCUapi2uvLggdM/ATHIAYIQr/kPV1jLH8s/yfhCAXBt2zx/4DBwBQYC5IIAjpaBAQv4QihZgQEBQTP0Cm+hlAHXADCSW23ibvL0+EP4Qts8XHBZyHABywFzAcsBcAHLABLMzMn5AMhyAcsBcAHLABLKB8v/ydAg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIghAF9eEAUGVyBQcIATptbSJus5lbIG7y0IBvIgGRMuIQJHADBIBCUCPbPAoAlAHQ9AQwbQGBRfwBgBD0D2+h8uCHAYFF/CICgBD0F8gByPQAyQHMcAHKAFgg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxbJAqTIVSCCEKYl5OlQBMsfyFADzxbJWMzLH8hYzxbJAczJEDVeMVRkYH8GBQRBM9s8AqSBAQv4QiIQN4EBASFulVtZ9FkwmMgBzwBBM/RB4gKBAQECCgkAqHBZyHABywFzAcsBcAHLABLMzMn5AMhyAcsBcAHLABLKB8v/ydAg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIJBA0ASBulTBZ9FowlEEz9BTiWAHKyHEBygFQBwHKAHABygJQBSDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAD+gJwAcpoI26zkX+TJG6z4pczMwFwAcoA4w0hbrOcfwHKAAEgbvLQgAHMlTFwAcoA4skB+wALAJh/AcoAyHABygBwAcoAJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4iRus51/AcoABCBu8tCAUATMljQDcAHKAOJwAcoAAn8BygACyVjMAgEgDg8CAUgTFAIRtTAbZ5tnjYowEBEAubd6ME4LnYerpZXPY9CdhzrJUKNs0E4TusalpWyPlmRadeW/vixHME4ECrgDcAzscpnLB1XI5LZYcE4DepO98qiy3jjqenvAqzhk0E4TsunLVmnZbmdB0s2yjN0UkAGc7UTQ1AH4Y9IAAY4s0wf6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAfQE9ATTH1VAbBXg+CjXCwqDCbry4ImBAQHXAAEB0ds8EgACIQAMbW34QllwABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbVFYTHFZQm5TVFF2R0xRMzVobTVDaFJoalB3VWhwZUhkZFhFUXNtRmJMVlhngg');
-    const __system = Cell.fromBase64('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');
+    const __code = Cell.fromBase64('te6ccgECFQEABFUAART/APSkE/S88sgLAQIBYgIDAujQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCyPhDAcx/AcoAVUBQRcsHWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFvQA9ADLH8ntVBAEAgFYDA0C3AGSMH/gcCHXScIflTAg1wsf3iCCEBpkhzy6jp4w0x8BghAaZIc8uvLggdQB0AHTH9QB0EMwbBPbPH/gghCUapi2uo6n0x8BghCUapi2uvLggdM/ATHIAYIQr/kPV1jLH8s/yfhCAXBt2zx/4DBwBQYC9IIAjpaBAQv4QihZgQEBQTP0Cm+hlAHXADCSW23icCFukltwkbri8vT4Q/hC2zxccFnIcAHLAXMBywFwAcsAEszMyfkAyHIBywFwAcsAEsoHy//J0CDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IiCEAX14QBQZXIFBwgBOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8CgCUAdD0BDBtAYFF/AGAEPQPb6Hy4IcBgUX8IgKAEPQXyAHI9ADJAcxwAcoAWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFskCpMhVIIIQGmSHPFAEyx/IUAPPFslYzMsfyFjPFskBzMkQNV4xVGRgfwYFBEEz2zwCpIEBC/hCIhA3gQEBIW6VW1n0WTCYyAHPAEEz9EHiAoEBAQIKCQCocFnIcAHLAXMBywFwAcsAEszMyfkAyHIBywFwAcsAEsoHy//J0CDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgkEDQBIG6VMFn0WjCUQTP0FOJYAcrIcQHKAVAHAcoAcAHKAlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WUAP6AnABymgjbrORf5MkbrPilzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7AAsAmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwCASAODwIBSBMUAhG1MBtnm2eNijAQEQCVt3owTgudh6ullc9j0J2HOslQo2zQThO6xqWlbI+WZFp15b++LEcwTgQKuANwDOxymcsHVcjktlhwThOy6ctWadluZ0HSzbKM3RSQAZztRNDUAfhj0gABjizTB/pAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB9AT0BNMfVUBsFeD4KNcLCoMJuvLgiYEBAdcAAQHR2zwSAAIhAAxtbfhCWXAAEbCvu1E0NIAAYAB1sm7jQ1aXBmczovL1FtWVA0andTa1VnU21GNms2Mjd5clp2S3VxRTdnQ0hRY0hoS1VwWXlSQzJpaDKCA=');
+    const __system = Cell.fromBase64('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');
     let builder = beginCell();
     builder.storeRef(__system);
     builder.storeUint(0, 1);
@@ -588,7 +588,7 @@ const AstrotelMainContract_types: ABIType[] = [
     {"name":"FactoryDeploy","header":1829761339,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"cashback","type":{"kind":"simple","type":"address","optional":false}}]},
     {"name":"UpdateDetails","header":4233759854,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
     {"name":"Astrologer","header":null,"fields":[{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
-    {"name":"AddAstrologer","header":2787501289,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
+    {"name":"AddAstrologer","header":442795836,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telgram_id","type":{"kind":"simple","type":"string","optional":false}}]},
     {"name":"RequestChat","header":3095819024,"fields":[{"name":"astrologer_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"client_telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
 ]
 

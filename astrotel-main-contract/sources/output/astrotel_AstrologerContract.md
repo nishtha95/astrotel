@@ -1,6 +1,6 @@
 # TACT Compilation Report
 Contract: AstrologerContract
-BOC Size: 600 bytes
+BOC Size: 618 bytes
 
 # Types
 Total Types: 10
@@ -38,8 +38,8 @@ TLB: `_ owner:address expertise:^string fees:uint32 telegram_id:^string = Astrol
 Signature: `Astrologer{owner:address,expertise:^string,fees:uint32,telegram_id:^string}`
 
 ## AddAstrologer
-TLB: `add_astrologer#1a64873c expertise:^string fees:uint32 telgram_id:^string = AddAstrologer`
-Signature: `AddAstrologer{expertise:^string,fees:uint32,telgram_id:^string}`
+TLB: `add_astrologer#a625e4e9 expertise:^string fees:uint32 telegram_id:^string = AddAstrologer`
+Signature: `AddAstrologer{expertise:^string,fees:uint32,telegram_id:^string}`
 
 ## RequestChat
 TLB: `request_chat#b8867310 astrologer_address:address client_telegram_id:^string = RequestChat`

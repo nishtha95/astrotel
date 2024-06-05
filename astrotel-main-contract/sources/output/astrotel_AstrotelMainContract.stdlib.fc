@@ -92,10 +92,6 @@ int __tact_dict_get_slice_int(cell d, int kl, slice k, int vl) inline {
     }
 }
 
-int __tact_int_eq_nullable_one(int a, int b) inline {
-    return (null?(a)) ? (false) : (a == b);
-}
-
 cell __tact_dict_set_code(cell dict, int id, cell code) inline {
     return udict_set_ref(dict, 16, id, code);
 }

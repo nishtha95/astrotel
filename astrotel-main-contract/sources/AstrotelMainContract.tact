@@ -4,7 +4,7 @@ import "./AstrologerContract";
 message AddAstrologer {
     expertise: String;
     fees: Int as uint32;
-    telgram_id: String;
+    telegram_id: String;
 }
 
 message RequestChat {
@@ -26,7 +26,7 @@ contract AstrotelMainContract with Deployable {
     }
 
     receive(msg: AddAstrologer) {
-        require(self.walletAddressToAstrologerId.get(sender()) == 0, "Address already registered");
+        require(self.walletAddressToAstrologerId.get(sender()) == null, "Address already registered");
         let init: StateInit = initOf AstrologerContract(sender());
         send(SendParameters{
             to: contractAddress(init),
@@ -46,7 +46,7 @@ contract AstrotelMainContract with Deployable {
     //     astrologer.requestChat(msg.client_telegram_id);
     // }
 
-    get fun getAllAstrologers(): map<Int, Address> {
+    get fun getAllAstrologers(): map<Int,Address> {
         return self.astrologerIdToContractAddress;
     }
 }

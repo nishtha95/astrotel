@@ -57,16 +57,16 @@ cell $DeployOk$_store_cell((int) v) inline {
 
 ;;
 ;; Type: AddAstrologer
-;; Header: 0x1a64873c
-;; TLB: add_astrologer#1a64873c expertise:^string fees:uint32 telgram_id:^string = AddAstrologer
+;; Header: 0xa625e4e9
+;; TLB: add_astrologer#a625e4e9 expertise:^string fees:uint32 telegram_id:^string = AddAstrologer
 ;;
 
 builder $AddAstrologer$_store(builder build_0, (slice, int, slice) v) inline {
-    var (v'expertise, v'fees, v'telgram_id) = v;
-    build_0 = store_uint(build_0, 442795836, 32);
+    var (v'expertise, v'fees, v'telegram_id) = v;
+    build_0 = store_uint(build_0, 2787501289, 32);
     build_0 = build_0.store_ref(begin_cell().store_slice(v'expertise).end_cell());
     build_0 = build_0.store_uint(v'fees, 32);
-    build_0 = build_0.store_ref(begin_cell().store_slice(v'telgram_id).end_cell());
+    build_0 = build_0.store_ref(begin_cell().store_slice(v'telegram_id).end_cell());
     return build_0;
 }
 
@@ -75,11 +75,11 @@ cell $AddAstrologer$_store_cell((slice, int, slice) v) inline {
 }
 
 (slice, ((slice, int, slice))) $AddAstrologer$_load(slice sc_0) inline {
-    throw_unless(129, sc_0~load_uint(32) == 442795836);
+    throw_unless(129, sc_0~load_uint(32) == 2787501289);
     var v'expertise = sc_0~load_ref().begin_parse();
     var v'fees = sc_0~load_uint(32);
-    var v'telgram_id = sc_0~load_ref().begin_parse();
-    return (sc_0, (v'expertise, v'fees, v'telgram_id));
+    var v'telegram_id = sc_0~load_ref().begin_parse();
+    return (sc_0, (v'expertise, v'fees, v'telegram_id));
 }
 
 ;;
