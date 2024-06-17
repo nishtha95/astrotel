@@ -527,30 +527,30 @@ function dictValueParserRequestChat(): DictionaryValue<RequestChat> {
     }
 }
 
- type AstrotelMainContract_init_args = {
-    $$type: 'AstrotelMainContract_init_args';
-    id: bigint;
+ type AstrologerContract_init_args = {
+    $$type: 'AstrologerContract_init_args';
+    owner: Address;
 }
 
-function initAstrotelMainContract_init_args(src: AstrotelMainContract_init_args) {
+function initAstrologerContract_init_args(src: AstrologerContract_init_args) {
     return (builder: Builder) => {
         let b_0 = builder;
-        b_0.storeInt(src.id, 257);
+        b_0.storeAddress(src.owner);
     };
 }
 
-async function AstrotelMainContract_init(id: bigint) {
-    const __code = Cell.fromBase64('te6ccgECFQEABFgAART/APSkE/S88sgLAQIBYgIDAujQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCyPhDAcx/AcoAVUBQRcsHWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFvQA9ADLH8ntVBAEAgFYDA0C3AGSMH/gcCHXScIflTAg1wsf3iCCEKYl5Om6jp4w0x8BghCmJeTpuvLggdQB0AHTH9QB0EMwbBPbPH/gghCUapi2uo6n0x8BghCUapi2uvLggdM/ATHIAYIQr/kPV1jLH8s/yfhCAXBt2zx/4DBwBQYC1oIAjpaBAQv4QihZgQEBQTP0Cm+hlAHXADCSW23ibvL0+EP4Qts8XHBZyHABywFzAcsBcAHLABLMzMn5AMhyAcsBcAHLABLKB8v/ydAg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIRFMSBwgBOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8CgCUAdD0BDBtAYFF/AGAEPQPb6Hy4IcBgUX8IgKAEPQXyAHI9ADJAcxwAcoAWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFskCpMhVIIIQ/FoMblAEyx/IUAPPFslYzMsfyFjPFskBzMmCEAX14QByU0V/BkVV2zwCpIEBC/hCIhA3gQEBIW6VW1n0WTCYyAHPAEEz9EHiAoEBAQIKCQCocFnIcAHLAXMBywFwAcsAEszMyfkAyHIBywFwAcsAEsoHy//J0CDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgkEDQBIG6VMFn0WjCUQTP0FOJYAcrIcQHKAVAHAcoAcAHKAlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WUAP6AnABymgjbrORf5MkbrPilzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7AAsAmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwCASAODwIBSBMUAhG1MBtnm2eNijAQEQC5t3owTgudh6ullc9j0J2HOslQo2zQThO6xqWlbI+WZFp15b++LEcwTgQKuANwDOxymcsHVcjktlhwTgN6k73yqLLeOOp6e8CrOGTQThOy6ctWadluZ0HSzbKM3RSQAZztRNDUAfhj0gABjizTB/pAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB9AT0BNMfVUBsFeD4KNcLCoMJuvLgiYEBAdcAAQHR2zwSAAIhAAxtbfhCWXAAEbCvu1E0NIAAYAB1sm7jQ1aXBmczovL1FtUVhMcVlCblNUUXZHTFEzNWhtNUNoUmhqUHdVaHBlSGRkWEVRc21GYkxWWGeCA=');
-    const __system = Cell.fromBase64('te6cckECKAEABsAAAQHAAQIBIAISAQW+L+QDART/APSkE/S88sgLBAIBYgUIA3rQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCCgYHAIwBkjB/4HAh10nCH5UwINcLH96CEPxaDG66jijTHwGCEPxaDG668uCB1AHQAdMf1AHQQzBsE2wzgVwN+EJSYMcF8vR/4DBwALzI+EMBzH8BygBVQFBUINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFshYzxbJAcwSyx/IWM8WyQHMye1UAgEgCQ4CEbzRztnm2eNipAoNAc7tRNDUAfhj0gABjk/6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB1AHQAdMf1AHQFRRDMGwV4Pgo1wsKgwm68uCJCwFG+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAHR2zwMAA74QosIcIsIAAhUdCEjAgEgDxAAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAIBSCYRAHWybuNDVpcGZzOi8vUW1Uc1IxUjRFcVZOTE1WeUFHdW4zZmh0S0Y1TmRIWVRDTWJHTXFZajFSZzVZUoIAEFvYZcEwEU/wD0pBP0vPLICxQCAWIVHgLo0AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8VRTbPPLggsj4QwHMfwHKAFVAUEXLB1gg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxb0APQAyx/J7VQhFgLcAZIwf+BwIddJwh+VMCDXCx/eIIIQpiXk6bqOnjDTHwGCEKYl5Om68uCB1AHQAdMf1AHQQzBsE9s8f+CCEJRqmLa6jqfTHwGCEJRqmLa68uCB0z8BMcgBghCv+Q9XWMsfyz/J+EIBcG3bPH/gMHAXGwLWggCOloEBC/hCKFmBAQFBM/QKb6GUAdcAMJJbbeJu8vT4Q/hC2zxccFnIcAHLAXMBywFwAcsAEszMyfkAyHIBywFwAcsAEsoHy//J0CDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhEUxIYGQCUAdD0BDBtAYFF/AGAEPQPb6Hy4IcBgUX8IgKAEPQXyAHI9ADJAcxwAcoAWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFskCpMhVIIIQ/FoMblAEyx/IUAPPFslYzMsfyFjPFskBzMmCEAX14QByU0V/BkVV2zwCpIEBC/hCIhA3gQEBIW6VW1n0WTCYyAHPAEEz9EHiAoEBAQIcGgCocFnIcAHLAXMBywFwAcsAEszMyfkAyHIBywFwAcsAEsoHy//J0CDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgkEDQBIG6VMFn0WjCUQTP0FOJYATptbSJus5lbIG7y0IBvIgGRMuIQJHADBIBCUCPbPBwByshxAcoBUAcBygBwAcoCUAUg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxZQA/oCcAHKaCNus5F/kyRus+KXMzMBcAHKAOMNIW6znH8BygABIG7y0IABzJUxcAHKAOLJAfsAHQCYfwHKAMhwAcoAcAHKACRus51/AcoABCBu8tCAUATMljQDcAHKAOIkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDicAHKAAJ/AcoAAslYzAIBWB8lAgEgICQCEbUwG2ebZ42KMCEjAZztRNDUAfhj0gABjizTB/pAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB9AT0BNMfVUBsFeD4KNcLCoMJuvLgiYEBAdcAAQHR2zwiAAxtbfhCWXAAAiEAubd6ME4LnYerpZXPY9CdhzrJUKNs0E4TusalpWyPlmRadeW/vixHME4ECrgDcAzscpnLB1XI5LZYcE4DepO98qiy3jjqenvAqzhk0E4TsunLVmnZbmdB0s2yjN0UkAIBSCYnABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbVFYTHFZQm5TVFF2R0xRMzVobTVDaFJoalB3VWhwZUhkZFhFUXNtRmJMVlhnggI+2Oiw==');
+async function AstrologerContract_init(owner: Address) {
+    const __code = Cell.fromBase64('te6ccgECEAEAAl4AART/APSkE/S88sgLAQIBYgIDA3rQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCCAQFAgEgBgcAjAGSMH/gcCHXScIflTAg1wsf3oIQ/FoMbrqOKNMfAYIQ/FoMbrry4IHUAdAB0x/UAdBDMGwTbDOBXA34QlJgxwXy9H/gMHAAvMj4QwHMfwHKAFVAUFQg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxZYINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WyFjPFskBzBLLH8hYzxbJAczJ7VQCEbzRztnm2eNipAgJAgEgDA0Bzu1E0NQB+GPSAAGOT/pAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAHUAdAB0x/UAdAVFEMwbBXg+CjXCwqDCbry4IkKAAhUdCEjAUb6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAdHbPAsADvhCiwhwiwgAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAIBSA4PABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbVRzUjFSNEVxVk5MTVZ5QUd1bjNmaHRLRjVOZEhZVENNYkdNcVlqMVJnNVlSgg');
+    const __system = Cell.fromBase64('te6cckECEgEAAmgAAQHAAQEFoIv5AgEU/wD0pBP0vPLICwMCAWIEBwN60AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8VRTbPPLgggkFBgCMAZIwf+BwIddJwh+VMCDXCx/eghD8Wgxuuo4o0x8BghD8WgxuuvLggdQB0AHTH9QB0EMwbBNsM4FcDfhCUmDHBfL0f+AwcAC8yPhDAcx/AcoAVUBQVCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlgg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxbIWM8WyQHMEssfyFjPFskBzMntVAIBIAgNAhG80c7Z5tnjYqQJDAHO7UTQ1AH4Y9IAAY5P+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAdQB0AHTH9QB0BUUQzBsFeD4KNcLCoMJuvLgiQoBRvpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB0ds8CwAO+EKLCHCLCAAIVHQhIwIBIA4PALm7vRgnBc7D1dLK57HoTsOdZKhRtmgnCd1jUtK2R8syLTry398WI5gnAgVcAbgGdjlM5YOq5HJbLDgnAb1J3vlUWW8cdT094FWcMmgnCdl05as07LczoOlm2UZuikgCAUgQEQARsK+7UTQ0gABgAHWybuNDVpcGZzOi8vUW1Uc1IxUjRFcVZOTE1WeUFHdW4zZmh0S0Y1TmRIWVRDTWJHTXFZajFSZzVZUoIHQzUn0=');
     let builder = beginCell();
     builder.storeRef(__system);
     builder.storeUint(0, 1);
-    initAstrotelMainContract_init_args({ $$type: 'AstrotelMainContract_init_args', id })(builder);
+    initAstrologerContract_init_args({ $$type: 'AstrologerContract_init_args', owner })(builder);
     const __data = builder.endCell();
     return { code: __code, data: __data };
 }
 
-const AstrotelMainContract_errors: { [key: number]: { message: string } } = {
+const AstrologerContract_errors: { [key: number]: { message: string } } = {
     2: { message: `Stack undeflow` },
     3: { message: `Stack overflow` },
     4: { message: `Integer overflow` },
@@ -579,7 +579,7 @@ const AstrotelMainContract_errors: { [key: number]: { message: string } } = {
     36502: { message: `Address already registered` },
 }
 
-const AstrotelMainContract_types: ABIType[] = [
+const AstrologerContract_types: ABIType[] = [
     {"name":"StateInit","header":null,"fields":[{"name":"code","type":{"kind":"simple","type":"cell","optional":false}},{"name":"data","type":{"kind":"simple","type":"cell","optional":false}}]},
     {"name":"Context","header":null,"fields":[{"name":"bounced","type":{"kind":"simple","type":"bool","optional":false}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"raw","type":{"kind":"simple","type":"slice","optional":false}}]},
     {"name":"SendParameters","header":null,"fields":[{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}},{"name":"to","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"code","type":{"kind":"simple","type":"cell","optional":true}},{"name":"data","type":{"kind":"simple","type":"cell","optional":true}}]},
@@ -592,38 +592,37 @@ const AstrotelMainContract_types: ABIType[] = [
     {"name":"RequestChat","header":3095819024,"fields":[{"name":"astrologer_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"client_telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
 ]
 
-const AstrotelMainContract_getters: ABIGetter[] = [
-    {"name":"getAllAstrologers","arguments":[],"returnType":{"kind":"dict","key":"int","value":"address"}},
+const AstrologerContract_getters: ABIGetter[] = [
+    {"name":"getAccountDetails","arguments":[],"returnType":{"kind":"simple","type":"Astrologer","optional":false}},
 ]
 
-const AstrotelMainContract_receivers: ABIReceiver[] = [
-    {"receiver":"internal","message":{"kind":"typed","type":"AddAstrologer"}},
-    {"receiver":"internal","message":{"kind":"typed","type":"Deploy"}},
+const AstrologerContract_receivers: ABIReceiver[] = [
+    {"receiver":"internal","message":{"kind":"typed","type":"UpdateDetails"}},
 ]
 
-export class AstrotelMainContract implements Contract {
+export class AstrologerContract implements Contract {
     
-    static async init(id: bigint) {
-        return await AstrotelMainContract_init(id);
+    static async init(owner: Address) {
+        return await AstrologerContract_init(owner);
     }
     
-    static async fromInit(id: bigint) {
-        const init = await AstrotelMainContract_init(id);
+    static async fromInit(owner: Address) {
+        const init = await AstrologerContract_init(owner);
         const address = contractAddress(0, init);
-        return new AstrotelMainContract(address, init);
+        return new AstrologerContract(address, init);
     }
     
     static fromAddress(address: Address) {
-        return new AstrotelMainContract(address);
+        return new AstrologerContract(address);
     }
     
     readonly address: Address; 
     readonly init?: { code: Cell, data: Cell };
     readonly abi: ContractABI = {
-        types:  AstrotelMainContract_types,
-        getters: AstrotelMainContract_getters,
-        receivers: AstrotelMainContract_receivers,
-        errors: AstrotelMainContract_errors,
+        types:  AstrologerContract_types,
+        getters: AstrologerContract_getters,
+        receivers: AstrologerContract_receivers,
+        errors: AstrologerContract_errors,
     };
     
     private constructor(address: Address, init?: { code: Cell, data: Cell }) {
@@ -631,14 +630,11 @@ export class AstrotelMainContract implements Contract {
         this.init = init;
     }
     
-    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: AddAstrologer | Deploy) {
+    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: UpdateDetails) {
         
         let body: Cell | null = null;
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'AddAstrologer') {
-            body = beginCell().store(storeAddAstrologer(message)).endCell();
-        }
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'Deploy') {
-            body = beginCell().store(storeDeploy(message)).endCell();
+        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'UpdateDetails') {
+            body = beginCell().store(storeUpdateDetails(message)).endCell();
         }
         if (body === null) { throw new Error('Invalid message type'); }
         
@@ -646,10 +642,10 @@ export class AstrotelMainContract implements Contract {
         
     }
     
-    async getGetAllAstrologers(provider: ContractProvider) {
+    async getGetAccountDetails(provider: ContractProvider) {
         let builder = new TupleBuilder();
-        let source = (await provider.get('getAllAstrologers', builder.build())).stack;
-        let result = Dictionary.loadDirect(Dictionary.Keys.BigInt(257), Dictionary.Values.Address(), source.readCellOpt());
+        let source = (await provider.get('getAccountDetails', builder.build())).stack;
+        const result = loadTupleAstrologer(source);
         return result;
     }
     

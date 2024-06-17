@@ -2,48 +2,34 @@
 import './App.css';
 import { TonConnectButton } from '@tonconnect/ui-react';
 import { Button, List, ListItem, Checkbox } from 'konsta/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useTonClient } from './hooks/useTonClient';
+import { useAsyncInitialize } from '../hooks/useAsyncInitialize';
+import { Address, OpenedContract } from '@ton/core';
 import { USER_TYPE } from '../utils/constants';
-import fetch from 'node-fetch';
 import axios from 'axios';
+import { useAstrotelContract } from './hooks/useAstrotelContract';
 const BOT_TOKEN = '6746951461:AAGmz30aMIIIGxY7qagj7lA1Id1rhte72S4';
 const groupName = 'MyGroupChat';
 
 function App() {
   const [userType, setUserType] = useState(Number);
-  // const logInAsAstrologer = () => {
-  //   setUserType(USER_TYPE.ASTROLOGER);
-  // }
+  const {astrologers, addAstrologer}=useAstrotelContract();
+  
+  useEffect(() => {
+    console.log('astrologers',astrologers);
+  }, [astrologers]);
+  const logInAsAstrologer = () => {
+    console.log('logInAsAstrologer');
+    addAstrologer('Vedic Astrology', 100, '1234567890').then((response) => {
+      console.log('addAstrologer', response);
+    });
+  }
   // const logInAsClient = () => {
   //   setUserType(USER_TYPE.CLIENT);
   // }
 
-  const createGroupChat =  async () => {
-    console.log('dghghsd')
-    try {
-      // Create a group chat
-      console.log('here I am');
-      const data = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/createChat`, {title: groupName,});
-
-      if (data) {
-        console.log(data);
-        // const chatId = data.result.id;
-        // console.log('Group chat created:', chatId);
-
-        // Set permissions (only admins can post)
-        // await setChatPermissions(chatId, { can_send_messages: false }, '9034853955');
-
-        // Grant permissions to specific users (if needed)
-        // ... (see code from previous examples)
-
-      } else {
-        console.error('Error creating group chat:', data);
-      }
   
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }
   // async function setChatPermissions(chatId: string, permissions: object, userId: string | null=null) {
   //   const url = `https://api.telegram.org/bot${BOT_TOKEN}/setChatPermissions`;
   //   const data = {
@@ -72,7 +58,7 @@ function App() {
     <div >
       <div className='flex justify-center'><TonConnectButton /></div>
       <div className='m-5' />
-      <Button onClick={createGroupChat}>Create a channel</Button>
+      <Button onClick={logInAsAstrologer}>Log in as Astrologer</Button>
       {/* <Button onClick={logInAsAstrologer}>Log in as Astrologer</Button>
       <div className='m-5' />
       <Button onClick={logInAsClient}>Log in as Client</Button>
