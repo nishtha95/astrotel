@@ -9,15 +9,25 @@ import { Address, OpenedContract } from '@ton/core';
 import { USER_TYPE } from '../utils/constants';
 import axios from 'axios';
 import { useAstrotelContract } from './hooks/useAstrotelContract';
+import { useTonConnect } from './hooks/useTonConnect';
+import { useTonAddress } from '@tonconnect/ui-react';
+
 const BOT_TOKEN = '6746951461:AAGmz30aMIIIGxY7qagj7lA1Id1rhte72S4';
 const groupName = 'MyGroupChat';
 
 function App() {
   const [userType, setUserType] = useState(Number);
   const {astrologers, addAstrologer}=useAstrotelContract();
+  const { sender } = useTonConnect();
+  const userFriendlyAddress = useTonAddress();
+  const rawAddress = useTonAddress(false);
+
   
   useEffect(() => {
     console.log('astrologers',astrologers);
+    console.log("sender",sender, userFriendlyAddress);
+    console.log('userFriendlyAddress', userFriendlyAddress);
+    console.log('rawAddress', rawAddress);
   }, [astrologers]);
   const logInAsAstrologer = () => {
     console.log('logInAsAstrologer');
@@ -55,68 +65,17 @@ function App() {
   // }
  
   return (
-    <div >
-      <div className='flex justify-center'><TonConnectButton /></div>
-      <div className='m-5' />
-      <Button onClick={logInAsAstrologer}>Log in as Astrologer</Button>
-      {/* <Button onClick={logInAsAstrologer}>Log in as Astrologer</Button>
-      <div className='m-5' />
-      <Button onClick={logInAsClient}>Log in as Client</Button>
-      <div className='m-5' />
-      {userType === USER_TYPE.ASTROLOGER && <div>
-        <div className='flex justify-left'>
-          <p>What's your expertise?</p>
-          </div>
-          <List>
-              <ListItem
-                label
-                title="Vedic Astrology"
-                media={
-                  <>
-                    <Checkbox component="div" name="my-checkbox" />
-                  </>
-                }
-              />
-              <ListItem
-                label
-                title="Numerology"
-                media={
-                  <>
-                    <Checkbox component="div" name="my-checkbox" />
-                  </>
-                }
-              />
-              <ListItem
-                label
-                title="Tarot Reading"
-                media={
-                  <>
-                    <Checkbox component="div" name="my-checkbox" />
-                  </>
-                }
-              />
-              <ListItem
-                label
-                title="Vastushastra"
-                media={
-                  <>
-                    <Checkbox component="div" name="my-checkbox" />
-                  </>
-                }
-              />
-          </List>
-        <div className='flex justify-left'>
-          <p className='mr-5'>Fee</p>
-          <input type="number" placeholder=" Fee in Astrotokens" min={0} className='border-2 rounded outline-black' />
-        </div></div>}
-        {userType === USER_TYPE.CLIENT && <div>
-        <div className='flex justify-left'>
-          <input type="text" placeholder="Full Name (optional)" className='border-b-2 outline-black ml-2' />
-          <p>Date of birth</p>
-          
-        </div>
-        </div>}
-  */}
+    <div className='flex flex-col justify-center items-center'>
+      {/* <img src="https://nishtha95.github.io/astrotel/icon.jpeg" alt="Astrotel" className='w-20 h-20 ' /> */}
+      <h3 className='text-2xl font-bold mt-5'>Astrotel</h3>
+      <h1>Worried about your future?</h1>
+      <h2>Get your future predictions from our expert astrologers</h2>
+
+      <div className='absolute bottom-40'><TonConnectButton /></div>
+      {/* <div className='m-5' />
+      <Button onClick={logInAsAstrologer}>Register as Astrologer</Button>
+      <div className='m-5'>Continue as Client</div> */}
+      
     </div>
   );
 }

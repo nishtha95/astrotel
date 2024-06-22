@@ -7,7 +7,7 @@ import { Address, OpenedContract } from '@ton/core';
 import { useTonConnect } from './useTonConnect';
 import { toNano } from 'ton';
 export function useAstrotelContract() {
-const CONTRACT_ADDRESS= 'EQAUzYYqZQ4BSc-jNOtxeVEr1FUUSSIoVWw5rMHFfgfS0DC8';
+const CONTRACT_ADDRESS= 'EQBMRC1zaXPA1jrzlV399uBiaUu_KFNZrhh8VBP4XKPslron';
 const client = useTonClient();
 const [astrologers, setAstrologers] = useState<null | Address[]>();
 const { sender } = useTonConnect();
