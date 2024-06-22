@@ -4,7 +4,6 @@ import { TonConnectButton } from '@tonconnect/ui-react';
 import { Button, List, ListItem, Checkbox } from 'konsta/react';
 import { useEffect, useState } from 'react';
 import { useTonClient } from './hooks/useTonClient';
-import { useAsyncInitialize } from '../hooks/useAsyncInitialize';
 import { Address, OpenedContract } from '@ton/core';
 import { USER_TYPE } from '../utils/constants';
 import axios from 'axios';
@@ -31,7 +30,7 @@ function App() {
   }, [astrologers]);
   const logInAsAstrologer = () => {
     console.log('logInAsAstrologer');
-    addAstrologer('Vedic Astrology', 100, '1234567890').then((response) => {
+    addAstrologer('4 years','Vedic Astrology', 100, '1234567890').then((response) => {
       console.log('addAstrologer', response);
     });
   }
@@ -66,7 +65,7 @@ function App() {
  
   return (
     <div className='flex flex-col justify-center items-center'>
-      {/* <img src="https://nishtha95.github.io/astrotel/icon.jpeg" alt="Astrotel" className='w-20 h-20 ' /> */}
+      <img src="https://nishtha95.github.io/astrotel/icon.jpeg" alt="Astrotel" className='w-20 h-20 ' />
       <h3 className='text-2xl font-bold mt-5'>Astrotel</h3>
       <h1>Worried about your future?</h1>
       <h2>Get your future predictions from our expert astrologers</h2>

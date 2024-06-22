@@ -56,8 +56,8 @@ function storeTupleStateInit(source: StateInit) {
 
 function dictValueParserStateInit(): DictionaryValue<StateInit> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeStateInit(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeStateInit(src)).endCell());
         },
         parse: (src) => {
             return loadStateInit(src.loadRef().beginParse());
@@ -111,8 +111,8 @@ function storeTupleContext(source: Context) {
 
 function dictValueParserContext(): DictionaryValue<Context> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeContext(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeContext(src)).endCell());
         },
         parse: (src) => {
             return loadContext(src.loadRef().beginParse());
@@ -181,8 +181,8 @@ function storeTupleSendParameters(source: SendParameters) {
 
 function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeSendParameters(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeSendParameters(src)).endCell());
         },
         parse: (src) => {
             return loadSendParameters(src.loadRef().beginParse());
@@ -223,8 +223,8 @@ function storeTupleDeploy(source: Deploy) {
 
 function dictValueParserDeploy(): DictionaryValue<Deploy> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeDeploy(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeDeploy(src)).endCell());
         },
         parse: (src) => {
             return loadDeploy(src.loadRef().beginParse());
@@ -265,8 +265,8 @@ function storeTupleDeployOk(source: DeployOk) {
 
 function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeDeployOk(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeDeployOk(src)).endCell());
         },
         parse: (src) => {
             return loadDeployOk(src.loadRef().beginParse());
@@ -312,8 +312,8 @@ function storeTupleFactoryDeploy(source: FactoryDeploy) {
 
 function dictValueParserFactoryDeploy(): DictionaryValue<FactoryDeploy> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeFactoryDeploy(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeFactoryDeploy(src)).endCell());
         },
         parse: (src) => {
             return loadFactoryDeploy(src.loadRef().beginParse());
@@ -324,6 +324,7 @@ function dictValueParserFactoryDeploy(): DictionaryValue<FactoryDeploy> {
 export type UpdateDetails = {
     $$type: 'UpdateDetails';
     expertise: string;
+    experience: string;
     fees: bigint;
     telegram_id: string;
 }
@@ -331,8 +332,9 @@ export type UpdateDetails = {
 export function storeUpdateDetails(src: UpdateDetails) {
     return (builder: Builder) => {
         let b_0 = builder;
-        b_0.storeUint(4233759854, 32);
+        b_0.storeUint(2974521012, 32);
         b_0.storeStringRefTail(src.expertise);
+        b_0.storeStringRefTail(src.experience);
         b_0.storeUint(src.fees, 32);
         b_0.storeStringRefTail(src.telegram_id);
     };
@@ -340,23 +342,26 @@ export function storeUpdateDetails(src: UpdateDetails) {
 
 export function loadUpdateDetails(slice: Slice) {
     let sc_0 = slice;
-    if (sc_0.loadUint(32) !== 4233759854) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 2974521012) { throw Error('Invalid prefix'); }
     let _expertise = sc_0.loadStringRefTail();
+    let _experience = sc_0.loadStringRefTail();
     let _fees = sc_0.loadUintBig(32);
     let _telegram_id = sc_0.loadStringRefTail();
-    return { $$type: 'UpdateDetails' as const, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
+    return { $$type: 'UpdateDetails' as const, expertise: _expertise, experience: _experience, fees: _fees, telegram_id: _telegram_id };
 }
 
 function loadTupleUpdateDetails(source: TupleReader) {
     let _expertise = source.readString();
+    let _experience = source.readString();
     let _fees = source.readBigNumber();
     let _telegram_id = source.readString();
-    return { $$type: 'UpdateDetails' as const, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
+    return { $$type: 'UpdateDetails' as const, expertise: _expertise, experience: _experience, fees: _fees, telegram_id: _telegram_id };
 }
 
 function storeTupleUpdateDetails(source: UpdateDetails) {
     let builder = new TupleBuilder();
     builder.writeString(source.expertise);
+    builder.writeString(source.experience);
     builder.writeNumber(source.fees);
     builder.writeString(source.telegram_id);
     return builder.build();
@@ -364,8 +369,8 @@ function storeTupleUpdateDetails(source: UpdateDetails) {
 
 function dictValueParserUpdateDetails(): DictionaryValue<UpdateDetails> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeUpdateDetails(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeUpdateDetails(src)).endCell());
         },
         parse: (src) => {
             return loadUpdateDetails(src.loadRef().beginParse());
@@ -377,6 +382,7 @@ export type Astrologer = {
     $$type: 'Astrologer';
     owner: Address;
     expertise: string;
+    experience: string;
     fees: bigint;
     telegram_id: string;
 }
@@ -386,6 +392,7 @@ export function storeAstrologer(src: Astrologer) {
         let b_0 = builder;
         b_0.storeAddress(src.owner);
         b_0.storeStringRefTail(src.expertise);
+        b_0.storeStringRefTail(src.experience);
         b_0.storeUint(src.fees, 32);
         b_0.storeStringRefTail(src.telegram_id);
     };
@@ -395,23 +402,26 @@ export function loadAstrologer(slice: Slice) {
     let sc_0 = slice;
     let _owner = sc_0.loadAddress();
     let _expertise = sc_0.loadStringRefTail();
+    let _experience = sc_0.loadStringRefTail();
     let _fees = sc_0.loadUintBig(32);
     let _telegram_id = sc_0.loadStringRefTail();
-    return { $$type: 'Astrologer' as const, owner: _owner, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
+    return { $$type: 'Astrologer' as const, owner: _owner, expertise: _expertise, experience: _experience, fees: _fees, telegram_id: _telegram_id };
 }
 
 function loadTupleAstrologer(source: TupleReader) {
     let _owner = source.readAddress();
     let _expertise = source.readString();
+    let _experience = source.readString();
     let _fees = source.readBigNumber();
     let _telegram_id = source.readString();
-    return { $$type: 'Astrologer' as const, owner: _owner, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
+    return { $$type: 'Astrologer' as const, owner: _owner, expertise: _expertise, experience: _experience, fees: _fees, telegram_id: _telegram_id };
 }
 
 function storeTupleAstrologer(source: Astrologer) {
     let builder = new TupleBuilder();
     builder.writeAddress(source.owner);
     builder.writeString(source.expertise);
+    builder.writeString(source.experience);
     builder.writeNumber(source.fees);
     builder.writeString(source.telegram_id);
     return builder.build();
@@ -419,8 +429,8 @@ function storeTupleAstrologer(source: Astrologer) {
 
 function dictValueParserAstrologer(): DictionaryValue<Astrologer> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeAstrologer(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeAstrologer(src)).endCell());
         },
         parse: (src) => {
             return loadAstrologer(src.loadRef().beginParse());
@@ -431,6 +441,7 @@ function dictValueParserAstrologer(): DictionaryValue<Astrologer> {
 export type AddAstrologer = {
     $$type: 'AddAstrologer';
     expertise: string;
+    experience: string;
     fees: bigint;
     telegram_id: string;
 }
@@ -438,8 +449,9 @@ export type AddAstrologer = {
 export function storeAddAstrologer(src: AddAstrologer) {
     return (builder: Builder) => {
         let b_0 = builder;
-        b_0.storeUint(2787501289, 32);
+        b_0.storeUint(2600865905, 32);
         b_0.storeStringRefTail(src.expertise);
+        b_0.storeStringRefTail(src.experience);
         b_0.storeUint(src.fees, 32);
         b_0.storeStringRefTail(src.telegram_id);
     };
@@ -447,23 +459,26 @@ export function storeAddAstrologer(src: AddAstrologer) {
 
 export function loadAddAstrologer(slice: Slice) {
     let sc_0 = slice;
-    if (sc_0.loadUint(32) !== 2787501289) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 2600865905) { throw Error('Invalid prefix'); }
     let _expertise = sc_0.loadStringRefTail();
+    let _experience = sc_0.loadStringRefTail();
     let _fees = sc_0.loadUintBig(32);
     let _telegram_id = sc_0.loadStringRefTail();
-    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
+    return { $$type: 'AddAstrologer' as const, expertise: _expertise, experience: _experience, fees: _fees, telegram_id: _telegram_id };
 }
 
 function loadTupleAddAstrologer(source: TupleReader) {
     let _expertise = source.readString();
+    let _experience = source.readString();
     let _fees = source.readBigNumber();
     let _telegram_id = source.readString();
-    return { $$type: 'AddAstrologer' as const, expertise: _expertise, fees: _fees, telegram_id: _telegram_id };
+    return { $$type: 'AddAstrologer' as const, expertise: _expertise, experience: _experience, fees: _fees, telegram_id: _telegram_id };
 }
 
 function storeTupleAddAstrologer(source: AddAstrologer) {
     let builder = new TupleBuilder();
     builder.writeString(source.expertise);
+    builder.writeString(source.experience);
     builder.writeNumber(source.fees);
     builder.writeString(source.telegram_id);
     return builder.build();
@@ -471,8 +486,8 @@ function storeTupleAddAstrologer(source: AddAstrologer) {
 
 function dictValueParserAddAstrologer(): DictionaryValue<AddAstrologer> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeAddAstrologer(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeAddAstrologer(src)).endCell());
         },
         parse: (src) => {
             return loadAddAstrologer(src.loadRef().beginParse());
@@ -518,8 +533,8 @@ function storeTupleRequestChat(source: RequestChat) {
 
 function dictValueParserRequestChat(): DictionaryValue<RequestChat> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeRequestChat(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeRequestChat(src)).endCell());
         },
         parse: (src) => {
             return loadRequestChat(src.loadRef().beginParse());
@@ -527,31 +542,31 @@ function dictValueParserRequestChat(): DictionaryValue<RequestChat> {
     }
 }
 
- type AstrotelMainContract_init_args = {
-    $$type: 'AstrotelMainContract_init_args';
-    id: bigint;
+ type AstrologerContract_init_args = {
+    $$type: 'AstrologerContract_init_args';
+    parent: Address;
 }
 
-function initAstrotelMainContract_init_args(src: AstrotelMainContract_init_args) {
+function initAstrologerContract_init_args(src: AstrologerContract_init_args) {
     return (builder: Builder) => {
         let b_0 = builder;
-        b_0.storeInt(src.id, 257);
+        b_0.storeAddress(src.parent);
     };
 }
 
-async function AstrotelMainContract_init(id: bigint) {
-    const __code = Cell.fromBase64('te6ccgECFQEABFgAART/APSkE/S88sgLAQIBYgIDAujQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCyPhDAcx/AcoAVUBQRcsHWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFvQA9ADLH8ntVBAEAgFYDA0C3AGSMH/gcCHXScIflTAg1wsf3iCCEKYl5Om6jp4w0x8BghCmJeTpuvLggdQB0AHTH9QB0EMwbBPbPH/gghCUapi2uo6n0x8BghCUapi2uvLggdM/ATHIAYIQr/kPV1jLH8s/yfhCAXBt2zx/4DBwBQYC1oIAjpaBAQv4QihZgQEBQTP0Cm+hlAHXADCSW23ibvL0+EP4Qts8XHBZyHABywFzAcsBcAHLABLMzMn5AMhyAcsBcAHLABLKB8v/ydAg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIRFMSBwgBOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8CgCUAdD0BDBtAYFF/AGAEPQPb6Hy4IcBgUX8IgKAEPQXyAHI9ADJAcxwAcoAWCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFskCpMhVIIIQ/FoMblAEyx/IUAPPFslYzMsfyFjPFskBzMmCEAX14QByU0V/BkVV2zwCpIEBC/hCIhA3gQEBIW6VW1n0WTCYyAHPAEEz9EHiAoEBAQIKCQCocFnIcAHLAXMBywFwAcsAEszMyfkAyHIBywFwAcsAEsoHy//J0CDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgkEDQBIG6VMFn0WjCUQTP0FOJYAcrIcQHKAVAHAcoAcAHKAlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WUAP6AnABymgjbrORf5MkbrPilzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7AAsAmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwCASAODwIBSBMUAhG1MBtnm2eNijAQEQC5t3owTgudh6ullc9j0J2HOslQo2zQThO6xqWlbI+WZFp15b++LEcwTgQKuANwDOxymcsHVcjktlhwTgN6k73yqLLeOOp6e8CrOGTQThOy6ctWadluZ0HSzbKM3RSQAZztRNDUAfhj0gABjizTB/pAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB9AT0BNMfVUBsFeD4KNcLCoMJuvLgiYEBAdcAAQHR2zwSAAIhAAxtbfhCWXAAEbCvu1E0NIAAYAB1sm7jQ1aXBmczovL1FtUVhMcVlCblNUUXZHTFEzNWhtNUNoUmhqUHdVaHBlSGRkWEVRc21GYkxWWGeCA=');
-    const __system = Cell.fromBase64('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');
+async function AstrologerContract_init(parent: Address) {
+    const __code = Cell.fromBase64('te6ccgECDwEAAjcAART/APSkE/S88sgLAQIBYgIDA3rQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFNs88uCCCAQFAgEgBgcAkgGSMH/gcCHXScIflTAg1wsf3oIQsUuWtLqOK9MfAYIQsUuWtLry4IHUAdAB1AHQAdMf1AHQFEMwbBRsRPhCUlDHBfLnOX/gMHAAmMj4QwHMfwHKAFVAUFQg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxbIUAPPFslYzMhYzxbJAcwSyx/IyFADzxbJWMzJAczJ7VQCEbzRztnm2eNirAgJAgEgCwwB4u1E0NQB+GPSAAGONvpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB1AHQAdQB0AHTH9QB0NQw0BUUQzBsFeD4KNcLCoMJuvLgifpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB0ds8CgAKVHQyU0MAFDD4QosIiwhwiwgAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAIBSA0OABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbVlmTFZyVHZKc0F1S0ZqVERWcXVNbTNNekNrY2YzYXVHa3A0aFZhempEQXllgg');
+    const __system = Cell.fromBase64('te6cckECEQEAAkEAAQHAAQEFoIv5AgEU/wD0pBP0vPLICwMCAWIEBwN60AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8VRTbPPLgggkFBgCSAZIwf+BwIddJwh+VMCDXCx/eghCxS5a0uo4r0x8BghCxS5a0uvLggdQB0AHUAdAB0x/UAdAUQzBsFGxE+EJSUMcF8uc5f+AwcACYyPhDAcx/AcoAVUBQVCDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFshQA88WyVjMyFjPFskBzBLLH8jIUAPPFslYzMkBzMntVAIBIAgMAhG80c7Z5tnjYqwJCwHi7UTQ1AH4Y9IAAY42+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAHUAdAB1AHQAdMf1AHQ1DDQFRRDMGwV4Pgo1wsKgwm68uCJ+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAHR2zwKABQw+EKLCIsIcIsIAApUdDJTQwIBIA0OALm7vRgnBc7D1dLK57HoTsOdZKhRtmgnCd1jUtK2R8syLTry398WI5gnAgVcAbgGdjlM5YOq5HJbLDgnAb1J3vlUWW8cdT094FWcMmgnCdl05as07LczoOlm2UZuikgCAUgPEAARsK+7UTQ0gABgAHWybuNDVpcGZzOi8vUW1ZZkxWclR2SnNBdUtGalREVnF1TW0zTXpDa2NmM2F1R2twNGhWYXpqREF5ZYIOciw80=');
     let builder = beginCell();
     builder.storeRef(__system);
     builder.storeUint(0, 1);
-    initAstrotelMainContract_init_args({ $$type: 'AstrotelMainContract_init_args', id })(builder);
+    initAstrologerContract_init_args({ $$type: 'AstrologerContract_init_args', parent })(builder);
     const __data = builder.endCell();
     return { code: __code, data: __data };
 }
 
-const AstrotelMainContract_errors: { [key: number]: { message: string } } = {
-    2: { message: `Stack undeflow` },
+const AstrologerContract_errors: { [key: number]: { message: string } } = {
+    2: { message: `Stack underflow` },
     3: { message: `Stack overflow` },
     4: { message: `Integer overflow` },
     5: { message: `Integer out of expected range` },
@@ -575,55 +590,53 @@ const AstrotelMainContract_errors: { [key: number]: { message: string } } = {
     135: { message: `Code of a contract was not found` },
     136: { message: `Invalid address` },
     137: { message: `Masterchain support is not enabled for this contract` },
-    23565: { message: `Only owner can account details` },
-    36502: { message: `Address already registered` },
+    1849: { message: `Only owner can update account details` },
 }
 
-const AstrotelMainContract_types: ABIType[] = [
+const AstrologerContract_types: ABIType[] = [
     {"name":"StateInit","header":null,"fields":[{"name":"code","type":{"kind":"simple","type":"cell","optional":false}},{"name":"data","type":{"kind":"simple","type":"cell","optional":false}}]},
     {"name":"Context","header":null,"fields":[{"name":"bounced","type":{"kind":"simple","type":"bool","optional":false}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"raw","type":{"kind":"simple","type":"slice","optional":false}}]},
     {"name":"SendParameters","header":null,"fields":[{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}},{"name":"to","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"code","type":{"kind":"simple","type":"cell","optional":true}},{"name":"data","type":{"kind":"simple","type":"cell","optional":true}}]},
     {"name":"Deploy","header":2490013878,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}}]},
     {"name":"DeployOk","header":2952335191,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}}]},
     {"name":"FactoryDeploy","header":1829761339,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"cashback","type":{"kind":"simple","type":"address","optional":false}}]},
-    {"name":"UpdateDetails","header":4233759854,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
-    {"name":"Astrologer","header":null,"fields":[{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
-    {"name":"AddAstrologer","header":2787501289,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
+    {"name":"UpdateDetails","header":2974521012,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"experience","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
+    {"name":"Astrologer","header":null,"fields":[{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"experience","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
+    {"name":"AddAstrologer","header":2600865905,"fields":[{"name":"expertise","type":{"kind":"simple","type":"string","optional":false}},{"name":"experience","type":{"kind":"simple","type":"string","optional":false}},{"name":"fees","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
     {"name":"RequestChat","header":3095819024,"fields":[{"name":"astrologer_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"client_telegram_id","type":{"kind":"simple","type":"string","optional":false}}]},
 ]
 
-const AstrotelMainContract_getters: ABIGetter[] = [
-    {"name":"getAllAstrologers","arguments":[],"returnType":{"kind":"dict","key":"int","value":"address"}},
+const AstrologerContract_getters: ABIGetter[] = [
+    {"name":"getAccountDetails","arguments":[],"returnType":{"kind":"simple","type":"Astrologer","optional":false}},
 ]
 
-const AstrotelMainContract_receivers: ABIReceiver[] = [
-    {"receiver":"internal","message":{"kind":"typed","type":"AddAstrologer"}},
-    {"receiver":"internal","message":{"kind":"typed","type":"Deploy"}},
+const AstrologerContract_receivers: ABIReceiver[] = [
+    {"receiver":"internal","message":{"kind":"typed","type":"UpdateDetails"}},
 ]
 
-export class AstrotelMainContract implements Contract {
+export class AstrologerContract implements Contract {
     
-    static async init(id: bigint) {
-        return await AstrotelMainContract_init(id);
+    static async init(parent: Address) {
+        return await AstrologerContract_init(parent);
     }
     
-    static async fromInit(id: bigint) {
-        const init = await AstrotelMainContract_init(id);
+    static async fromInit(parent: Address) {
+        const init = await AstrologerContract_init(parent);
         const address = contractAddress(0, init);
-        return new AstrotelMainContract(address, init);
+        return new AstrologerContract(address, init);
     }
     
     static fromAddress(address: Address) {
-        return new AstrotelMainContract(address);
+        return new AstrologerContract(address);
     }
     
     readonly address: Address; 
     readonly init?: { code: Cell, data: Cell };
     readonly abi: ContractABI = {
-        types:  AstrotelMainContract_types,
-        getters: AstrotelMainContract_getters,
-        receivers: AstrotelMainContract_receivers,
-        errors: AstrotelMainContract_errors,
+        types:  AstrologerContract_types,
+        getters: AstrologerContract_getters,
+        receivers: AstrologerContract_receivers,
+        errors: AstrologerContract_errors,
     };
     
     private constructor(address: Address, init?: { code: Cell, data: Cell }) {
@@ -631,14 +644,11 @@ export class AstrotelMainContract implements Contract {
         this.init = init;
     }
     
-    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: AddAstrologer | Deploy) {
+    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: UpdateDetails) {
         
         let body: Cell | null = null;
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'AddAstrologer') {
-            body = beginCell().store(storeAddAstrologer(message)).endCell();
-        }
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'Deploy') {
-            body = beginCell().store(storeDeploy(message)).endCell();
+        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'UpdateDetails') {
+            body = beginCell().store(storeUpdateDetails(message)).endCell();
         }
         if (body === null) { throw new Error('Invalid message type'); }
         
@@ -646,10 +656,10 @@ export class AstrotelMainContract implements Contract {
         
     }
     
-    async getGetAllAstrologers(provider: ContractProvider) {
+    async getGetAccountDetails(provider: ContractProvider) {
         let builder = new TupleBuilder();
-        let source = (await provider.get('getAllAstrologers', builder.build())).stack;
-        let result = Dictionary.loadDirect(Dictionary.Keys.BigInt(257), Dictionary.Values.Address(), source.readCellOpt());
+        let source = (await provider.get('getAccountDetails', builder.build())).stack;
+        const result = loadTupleAstrologer(source);
         return result;
     }
     

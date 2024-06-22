@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import {AstrotelMainContract} from '../contracts/astrotel_AstrotelMainContract';
-import { AstrologerContract } from '../contracts/astrotel_AstrologerContract';
+import {AstrotelMainContract} from '../contracts/tact_AstrotelMainContract';
+import { AstrologerContract } from '../contracts/../contracts/tact_AstrologerContract';
 import { useTonClient } from './useTonClient';
 import { useAsyncInitialize } from './useAsyncInitialize';
 import { Address, OpenedContract } from '@ton/core';
@@ -42,8 +42,8 @@ const astrotelContract = useAsyncInitialize(async () => {
 return {
     astrologers: astrologers || [],
     address: astrotelContract?.address.toString(),
-    addAstrologer: async(expertise:string, fees: number,telegram_id:string, ) => {
-        return astrotelContract?.send(sender, { value: toNano(1) }, {expertise:expertise,fees:BigInt(fees),telegram_id:telegram_id, $$type: 'AddAstrologer' });
+    addAstrologer: async(experience:string, expertise:string, fees: number,telegram_id:string, ) => {
+        return astrotelContract?.send(sender, { value: toNano(1) }, {expertise:expertise,fees:BigInt(fees),telegram_id:telegram_id, experience: experience , $$type: 'AddAstrologer' });
     }
 };
 }
